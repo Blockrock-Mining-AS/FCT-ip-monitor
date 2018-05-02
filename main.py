@@ -15,7 +15,6 @@ if __name__ == '__main__':
                     'Name': 'userID',
                     'Name': 'userID'}
 
-
     for i in list_of_nodes:
         node_collection.append(Node(i))
 
@@ -27,7 +26,5 @@ if __name__ == '__main__':
 
     # Get info in a list of dicts
     node_info = node_collection.get_all()
-
-    print(node_info)
 
     bot.send_message(node_info, list_of_users)
