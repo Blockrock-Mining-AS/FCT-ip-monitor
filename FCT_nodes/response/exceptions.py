@@ -53,7 +53,7 @@ class HTTP404(HTTPError):
     """
     Http404 Error Exception
     The requested resource could not be found but may be available in the future.
-    Subsequent requests by the client are permissible.
+    Subsequent response by the client are permissible.
     """
     def __str__(self):
         return repr('404 not Found occurred')
@@ -73,7 +73,7 @@ class HTTP405(HTTPError):
 class HTTP429(HTTPError):
     """
     Http429 Error Exception
-    The user has sent too many requests in a given amount of time.
+    The user has sent too many response in a given amount of time.
     Intended for use with rate limiting schemes.
     """
     def __str__(self):
