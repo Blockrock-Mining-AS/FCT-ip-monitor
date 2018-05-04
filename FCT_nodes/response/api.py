@@ -44,7 +44,7 @@ class Api(object):
             raise HTTP503
 
     def get(self, **kwargs):
-        response = api.get(self.url, headers=self.headers, **kwargs)
+        response = api.get(self.url, headers=self.headers, timeout=5, **kwargs)
         self.handle_errors(response.status_code)
         return response
 
