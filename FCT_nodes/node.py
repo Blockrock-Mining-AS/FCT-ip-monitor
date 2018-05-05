@@ -34,9 +34,8 @@ class Node(object):
             if response and response.status_code == 200:
                 self._status = "ONLINE"
         except Exception as e:
-            # print(e)
+            print(e)
             self._status = "OFFLINE"
-
         return response
 
     def refresh(self):
@@ -45,7 +44,6 @@ class Node(object):
             selector = htmls.S(response.content)
             selector_soup = BeautifulSoup(response.content, 'html.parser')
             selector_soup = remove_attrs(selector_soup)
-
             self.set_version(selector)
             self.set_git_build(selector_soup)
             self.set_my_height()
@@ -57,13 +55,12 @@ class Node(object):
         else:
             self._version = "n/a"
             self._git_build = "n/a"
-            self.set_my_height()
-            self.set_leader_height()
-            self.set_complete_height()
-            self.set_node_type()
-            self.set_chainID()
+            self._my_height = "n/a"
+            self._leader_height = "n/a"
+            self._complete_height = "n/a"
+            self._node_type = "n/a"
+            self._chainID = "n/a"
             self._last_update = datetime.now()
-            pass
 
     def set_version(self, selector):
         self._version = selector.list('small')[1].text_normalized[1:]
@@ -156,15 +153,15 @@ class Node(object):
 
     @property
     def my_height(self):
-        return (self._my_height)
+        return self._my_height
 
     @property
     def leader_height(self):
-        return (self._leader_height)
+        return self._leader_height
 
     @property
     def complete_height(self):
-        return (self._complete_height)
+        return self._complete_height
 
     @property
     def node_type(self):
