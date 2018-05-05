@@ -34,7 +34,7 @@ class Node(object):
             if response and response.status_code == 200:
                 self._status = "ONLINE"
         except Exception as e:
-            # print(e)
+            print(e)
             self._status = "OFFLINE"
         return response
 

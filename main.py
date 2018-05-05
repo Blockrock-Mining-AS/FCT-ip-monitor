@@ -7,15 +7,14 @@ from FCT_nodes.telegram_bot import Bot
 
 def main():
     node_collection = NodeCollection()
-    bot = Bot(token='TELEGRAM-BOT-TOKEN',
+    bot = Bot(token='BOT-TOKEN',
               chatid='chatID')
     # List of your current nodes.
-    list_of_nodes = ['IP:PORT, '
+    list_of_nodes = ['IP:PORT',
                      'IP:PORT']
 
     # List of users to tag @ telegram if node(s) are offline.
-    list_of_users = {'Name': 'userID',
-                     'Name2': 'userID'}
+    list_of_users ={'NAME': 'userID'}
 
     for i in list_of_nodes:
         node_collection.append(Node(i))
@@ -28,12 +27,14 @@ def main():
         node_collection.refresh_all()
         node_updates = node_collection.get_all()
 
-        try:
+        node_collection.print_all()
+
+        if telegram_updates['ok']:
             if len(telegram_updates["result"]) > 0:
                 last_update_id = bot.get_last_update_id(telegram_updates) + 1
                 bot.handle_updates(telegram_updates, node_updates)
-        except Exception as e:
-            print(e)
+        else:
+            print("Failed to retrieve info from bot.")
 
         # If node down, alert maintenance team @telegram
         nodes_down = []
